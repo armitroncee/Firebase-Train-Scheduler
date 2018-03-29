@@ -19,7 +19,7 @@ $("#submit").on("click", function (event){
   var time = $("#trainTime").val().trim()
 
        var firstTimeConverted = moment(time, "hh:mm").subtract(1, "years");
-       var currentTime = moment();
+       var currentTime = moment(); 
        console.log(moment())
        var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
        var tRemainder = diffTime % frequency;
@@ -43,9 +43,8 @@ $("#submit").on("click", function (event){
 });
 
  database.ref().on("child_added", function(childSnapshot) {
- 	$(".table").append("<tr> <td>" + childSnapshot.val().name + "</td> <td>" + childSnapshot.val().destination + "</td> <td>" + childSnapshot.val().frequency + "</td> <td>" + childSnapshot.val().nextTrain + "</td> <td>" + childSnapshot.val().minutes + "</td> </tr>" )
+ 	$(".table").append("<tr> <td>" + childSnapshot.val().name + "</td> <td>" + childSnapshot.val().destination + "</td> <td>" + childSnapshot.val().frequency + "</td> <td id='next'>" + childSnapshot.val().nextTrain + "</td> <td id='min'>" + childSnapshot.val().minutes + "</td> </tr>" )
 
  }, function(errorObject) {
       console.log("Errors handled: " + errorObject.code);
     });
-
